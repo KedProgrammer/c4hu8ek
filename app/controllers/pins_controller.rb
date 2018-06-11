@@ -13,17 +13,14 @@ class PinsController < ApplicationController
     pin = Pin.new(pin_params)
     pin.user = current_user
     if pin.save
-      redirect_to root_path, notice: 'El pin fue creado exitosamente'
+      redirect_to root_path, notice: "El pin fue creado exitosamente"
     else
       render :new
     end
   end
 
   private
-
-  def pin_params
-    params.require(:pin).permit(:title, :image_url)
-  end
-
-
+    def pin_params
+      params.require(:pin).permit(:title, :image_url)
+    end
 end
