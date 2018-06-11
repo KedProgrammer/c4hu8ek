@@ -27,7 +27,8 @@ class PinsController < ApplicationController
   end
 
   def check_token
-    render status: 401 unless (request.headers['X-User-Email'] == current_user.email) &&
-                              (request.headers['X-Api-Token'] == current_user.api_token)
+    user = User.find_by(email: request.headers['X-User-Email'])
+    render status: 401 unless user &&
+                              request.headers['X-Api-Token'] == user.api_token
   end
 end
